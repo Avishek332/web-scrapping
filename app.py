@@ -67,7 +67,7 @@ def index():
                     #custComment.encode(encoding='utf-8')
                     custComment = comtag[0].div.text
                 except Exception as e:
-                    logging.info(e)
+                    logging.info(e) 
                 client = MongoClient("mongodb+srv://Avishek332:Avishek332@avishek.llwzzsi.mongodb.net/?retryWrites=true&w=majority")
                 db = client['review_scrap']
                 review_col = db['review_scrap_data']
