@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup as bs
 from urllib.request import urlopen as uReq
 import logging
 logging.basicConfig(filename="scrapper.log" , level=logging.INFO)
+from pymongo.mongo_client import MongoClient
 
 app = Flask(__name__)
 
@@ -67,6 +68,10 @@ def index():
                     custComment = comtag[0].div.text
                 except Exception as e:
                     logging.info(e)
+                client = MongoClient("mongodb+srv://Avishek332:Avishek332@avishek.llwzzsi.mongodb.net/?retryWrites=true&w=majority")
+                db = client['review_scrap']
+                review_col = db['review_scrap_data']
+                review_col.insert_many(reviews)
 
                 mydict = {"Product": searchString, "Name": name, "Rating": rating, "CommentHead": commentHead,
                           "Comment": custComment}
